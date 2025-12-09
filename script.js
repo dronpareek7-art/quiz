@@ -33,13 +33,17 @@ const data = [
 
 let questionIndex = 0;
 let count = 5;
+let score = 0;
 timerdiv.innerText = count;
 
 function printquestionsandoption() {
   questionsdiv.innerText = data[questionIndex].q;
   optionsdiv.forEach((e, index) => {
     e.innerText = data[questionIndex].option[index];
+    e.style.backgroundColor = "";
+    e.style.pointerEvents = "auto"
   });
+
 }
 
 let interval = setInterval(() => {
@@ -58,12 +62,30 @@ let interval = setInterval(() => {
   count--;
 }, 1000);
 
-optionsdiv.forEach((e, index) => {
+
+optionsdiv.forEach((e) => {
   e.addEventListener("click", () => {
-    if (e.innerText == data[questionIndex].a) {
+
+     //clearInterval(interval);
+
+    optionsdiv.forEach((e)=>{
+        e.style.pointerEvents = "none";
+    })
+
+    if (e.innerText === data[questionIndex].a) {
       e.style.backgroundColor = "green";
     } else {
       e.style.backgroundColor = "red";
+      optionsdiv.forEach((e) => {
+
+        if (e.innerText === data[questionIndex].a) {
+          e.style.backgroundColor = "green";
+        }
+      });
     }
+    // setTimeout(()=>{
+    //   count =1;
+
+    // },1000);
   });
 });
