@@ -6,11 +6,12 @@
 }
 
 body {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  height: 100vh;
+  background: linear-gradient(135deg, #8730e4, #2575fc);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 #main {
@@ -20,7 +21,8 @@ body {
 }
 
 #box {
-  width: 350px;
+  width: 100%;
+  max-width: 380px;
   padding: 30px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.15);
@@ -30,18 +32,28 @@ body {
   color: #fff;
   animation: fadeIn 0.8s ease;
 }
+
 h2 {
   margin-bottom: 15px;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .question {
   font-size: 20px;
   margin: 15px 0;
   font-weight: 500;
+}
+
+
+.question img {
+  width: 100%;          
+  max-width: 320px;
+  display: block;
+  margin: 10px auto;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
 .timer {
@@ -51,9 +63,8 @@ h2 {
   color: #333;
   padding: 8px 15px;
   width: fit-content;
-  margin: auto;
+  margin: 10px auto 20px;
   border-radius: 50px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .options p {
@@ -84,22 +95,21 @@ h2 {
 
 .next {
   padding: 10px 20px;
-  background: #4a90e2;       
+  background: #4a90e2;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 10px;
+  width: 30%;
 }
-
 
 .next:hover {
-  background: #357ABD;
+  background: #357abd;
 }
-
 
 .next:active {
   transform: scale(0.95);
 }
-
