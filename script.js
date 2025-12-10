@@ -2,7 +2,8 @@ timerdiv = document.querySelector(".timer");
 optionsdiv = document.querySelectorAll(".options p");
 questionsdiv = document.querySelector(".question");
 quiz = document.querySelector(".quiz");
-
+box = document.querySelector("#box");
+button = document.querySelector(".next");
 const data = [
   {
     q: "What is the capital of india",
@@ -33,59 +34,67 @@ const data = [
 
 let questionIndex = 0;
 let count = 5;
-let score = 0;
+score = 0;
 timerdiv.innerText = count;
 
-function printquestionsandoption() {
-  questionsdiv.innerText = data[questionIndex].q;
-  optionsdiv.forEach((e, index) => {
-    e.innerText = data[questionIndex].option[index];
-    e.style.backgroundColor = "";
-    e.style.pointerEvents = "auto"
-  });
-
-}
-
 let interval = setInterval(() => {
-  if (count > 0) {
+  if (count >= 1) {
     timerdiv.innerText = count;
   } else {
     count = 6;
     questionIndex++;
-    if (questionIndex >= data.length) {
-      questionIndex = 0;
-      quiz.style.display = "none";
+    optionsdiv.forEach((op) => {
+      op.style.backgroundColor = "";
+      op.style.pointerEvents = "auto";
+    });
+    if (questionIndex >= data.length - 1) {
       clearInterval(interval);
+      quiz.style.display = "none";
+      let para = document.createElement("p");
+      para.innerText = `your score is ${score} out of ${data.length}`;
+      box.append(para);
+      return;
     }
   }
-  printquestionsandoption();
+  printquestionandoption();
   count--;
 }, 1000);
 
+function printquestionandoption() {
+  questionsdiv.innerText = data[questionIndex].q;
+  optionsdiv.forEach((e, index) => {
+    e.innerText = data[questionIndex].option[index];
+  });
+}
 
 optionsdiv.forEach((e) => {
   e.addEventListener("click", () => {
-
-     //clearInterval(interval);
-
-    optionsdiv.forEach((e)=>{
-        e.style.pointerEvents = "none";
-    })
+    optionsdiv.forEach((e) => {
+      e.style.pointerEvents = "none";
+    });
 
     if (e.innerText === data[questionIndex].a) {
       e.style.backgroundColor = "green";
+      score++;
+      console.log(score);
     } else {
       e.style.backgroundColor = "red";
-      optionsdiv.forEach((e) => {
 
+      optionsdiv.forEach((e) => {
         if (e.innerText === data[questionIndex].a) {
           e.style.backgroundColor = "green";
         }
       });
     }
-    // setTimeout(()=>{
-    //   count =1;
-
-    // },1000);
   });
+});
+
+button.addEventListener("click", () => {
+  questionIndex++;
+  optionsdiv.forEach((op) => {
+    op.style.backgroundColor = "";
+    op.style.pointerEvents = "auto";
+  });
+  count = 5;
+  printquestionandoption();
 });
