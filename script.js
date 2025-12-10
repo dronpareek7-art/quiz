@@ -32,17 +32,32 @@ const data = [
     hasImage: false
   },
   {
-    q: "where is FSL",
-     Image: "https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    a: "aagra",
-    option: ["aagra", "Tajmahal", "red fort", "none "],
+    q: "who is this stupid guy",
+     Image: "images/fsl.jpg",
+    a: "Akshat ajuba",
+    option: ["Akshat ajuba", "Deepesh sir", "Rohit sir", "Dheeraj dada "],
     hasImage: true
   },
 ];
- 
+
+ function random(){
+  let randomq = Math.floor(Math.random()*data.length);
+
+  if(question.includes(randomq)){
+    return random();
+  }
+
+  question.push(randomq);
+  return randomq;
+}
+
+
+
 let count = 5;
 let questionIndex = 0;
  let score = 0;
+
+ let question = []
 
 printquestionandoption();
 let interval = setInterval(() => {
@@ -72,15 +87,17 @@ let interval = setInterval(() => {
       box.append(para);
       return;
     }
+   questionIndex = random();
     printquestionandoption();
   }
 
   count--;
-}, 1000);
+}, 2000);
 
 function printquestionandoption() {
   if(!data[questionIndex].hasImage) {
   questionsdiv.innerHTML = data[questionIndex].q;
+  
 
   } 
   else{
@@ -129,6 +146,10 @@ button.addEventListener("click", () => {
     op.style.pointerEvents = "auto";
   });
   questionIndex++;
+
+ questionIndex = random();
   printquestionandoption();
+  
 });
+
 
